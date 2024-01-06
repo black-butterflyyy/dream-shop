@@ -3,7 +3,6 @@ import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
 import {
   signInWithGooglePopup,
-  createUserDocumentFromAuth,
   signInUserWithEmailAndPassword,
 } from '../../utils/firebase/firebase.util';
 import './sign-in-form.styles.scss';
@@ -20,8 +19,7 @@ const SignInForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
-      const response = await signInUserWithEmailAndPassword(email, password);
-      console.log(response);
+      await signInUserWithEmailAndPassword(email, password);
     } catch (error) {
       if (error.code === 'auth/invalid-credential')
         return alert('Invalid email or password');
@@ -31,8 +29,7 @@ const SignInForm = () => {
 
   const signInWithGoogle = async () => {
     try {
-      const { user } = await signInWithGooglePopup();
-      await createUserDocumentFromAuth(user);
+      await signInWithGooglePopup();
     } catch (error) {
       console.error('Sign in with google failed', error.messsage);
     }
