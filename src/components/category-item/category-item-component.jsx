@@ -1,4 +1,5 @@
 ﻿import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 
 const BackgroundImage = styled.div`
   width: 100%;
@@ -68,10 +69,14 @@ const CategoryContainer = styled.div`
 `;
 
 const CategoryItem = ({ category }) => {
-  const { title, imageUrl } = category;
+  const navigate = useNavigate();
+
+  const { title, imageUrl, route } = category;
+
+  const onNavigateHandler = () => navigate(route);
 
   return (
-    <CategoryContainer>
+    <CategoryContainer onClick={onNavigateHandler}>
       <BackgroundImage imageUrl={imageUrl} />
       <CategoryBodyContainer>
         <h2>{title}</h2>
