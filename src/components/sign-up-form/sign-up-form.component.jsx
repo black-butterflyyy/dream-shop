@@ -1,11 +1,21 @@
 ﻿import { useState } from 'react';
+import styled from 'styled-components';
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from '../../utils/firebase/firebase.util';
 import FormInput from '../form-input/form-input.component';
 import Button from '../button/button.component';
-import './sign-up-form.styles.scss';
+
+const SignUpContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 380px;
+
+  h2 {
+    margin: 10px 0;
+  }
+`;
 
 const defaultFormFields = {
   displayName: '',
@@ -48,7 +58,7 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className='sign-up-container'>
+    <SignUpContainer>
       <h2>Don't have and account?</h2>
       <span>Sign up wih your email and password</span>
       <form onSubmit={handleSubmit}>
@@ -98,7 +108,7 @@ const SignUpForm = () => {
 
         <Button type='submit'>Sign Up</Button>
       </form>
-    </div>
+    </SignUpContainer>
   );
 };
 

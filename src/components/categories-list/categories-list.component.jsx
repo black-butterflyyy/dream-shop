@@ -1,13 +1,20 @@
-﻿import './categories-list.styles.scss';
+﻿import styled from 'styled-components';
 import CategoryItem from '../category-item/category-item-component';
+
+const CategoriesContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+`;
 
 const CategoriesList = ({ categories }) => {
   return (
-    <div className='categories-container'>
+    <CategoriesContainer>
       {categories.map((category) => (
         <CategoryItem category={category} key={category.id} />
       ))}
-    </div>
+    </CategoriesContainer>
   );
 };
 

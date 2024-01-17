@@ -1,6 +1,47 @@
 ﻿import { useContext } from 'react';
+import styled from 'styled-components';
 import { CartContext } from '../../contexts/cart.context';
-import './checkout-item.styles.scss';
+
+const CheckoutItemContainer = styled.div`
+  width: 100%;
+  display: flex;
+  min-height: 100px;
+  border-bottom: 1px solid darkgrey;
+  padding: 15px 0;
+  font-size: 20px;
+  align-items: center;
+`;
+
+const ImageContainer = styled.div`
+  width: 23%;
+  padding-right: 15px;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const CheckoutItemProperty = styled.span`
+  width: 23%;
+`;
+
+const QuantityValue = styled.span`
+  margin: 0 10px;
+`;
+
+const Arrow = styled.div`
+  cursor: pointer;
+`;
+
+const Quantity = styled(CheckoutItemProperty)`
+  display: flex;
+`;
+
+const RemoveButton = styled.div`
+  padding-left: 12px;
+  cursor: pointer;
+`;
 
 const CheckoutItem = ({ cartItem }) => {
   const { name, price, imageUrl, quantity } = cartItem;
@@ -15,25 +56,23 @@ const CheckoutItem = ({ cartItem }) => {
   const removeItemFromCartHandler = () => removeItemFromCart(cartItem);
 
   return (
-    <div className='checkout-item-container'>
-      <div className='image-container'>
+    <CheckoutItemContainer>
+      <ImageContainer>
         <img src={imageUrl} alt={name} />
-      </div>
-      <span className='name'>{name}</span>
-      <span className='quantity'>
-        <div className='arrow' onClick={removeItemFromCartHandler}>
-          &#10094;
-        </div>
-        <span className='value'>{quantity}</span>
-        <div className='arrow' onClick={addItemToCartHandler}>
+      </ImageContainer>
+      <CheckoutItemProperty>{name}</CheckoutItemProperty>
+      <Quantity>
+        <Arrow onClick={removeItemFromCartHandler}>&#10094;</Arrow>
+        <QuantityValue>{quantity}</QuantityValue>
+        <Arrow onClick={addItemToCartHandler}>
           &#10095;
-        </div>
-      </span>
-      <span className='price'>${price}</span>
-      <div className='remove-button' onClick={clearItemHandler}>
+        </Arrow>
+      </Quantity>
+      <CheckoutItemProperty>${price}</CheckoutItemProperty>
+      <RemoveButton onClick={clearItemHandler}>
         &#10005;
-      </div>
-    </div>
+      </RemoveButton>
+    </CheckoutItemContainer>
   );
 };
 
